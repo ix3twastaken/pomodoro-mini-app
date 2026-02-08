@@ -1,6 +1,5 @@
 import os
 import dearpygui.dearpygui as dpg
-from config import icon_path
 from gui import setup_gui
 
 def main():

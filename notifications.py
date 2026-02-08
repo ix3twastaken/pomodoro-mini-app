@@ -1,6 +1,6 @@
 import os
 from notifypy import Notify
-from config import PRESETS, icon_path
+from config import PRESETS
 import dearpygui.dearpygui as dpg
 
 def timer_notify(user_data: str):

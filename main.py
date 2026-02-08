@@ -1,5 +1,6 @@
 import os
 import dearpygui.dearpygui as dpg
+from config import icon_path
 from gui import setup_gui
 
 def main():
@@ -10,7 +11,7 @@ def main():
         max_height=250,
         min_width=200,
         min_height=250,
-        small_icon=os.path.join(os.path.dirname(__file__), "tomato.ico") #This icon was designed using resources from Flaticon.com.
+        small_icon=os.path.join(os.path.dirname(__file__), "icon.ico") #This icon was designed using resources from Flaticon.com.
     )
     
     setup_gui()

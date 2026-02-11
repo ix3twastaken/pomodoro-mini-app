@@ -1,6 +1,6 @@
 import time
 import threading
-from config import TimeUnit, PRESETS
+from config import WORK_TIME, REST_TIME
 from notifications import timer_notify
 import dearpygui.dearpygui as dpg
 
@@ -21,27 +21,29 @@ def timer(seconds):
             if timer_loop:
                 timer_loop = False
                 timer_notify("stop")
-                duration = get_preset(TimeUnit.CHILLTIME)
+                duration = get_preset("rest_time_presets")
                 timer(duration)
             else:
                 timer_loop = True
                 timer_notify("start")
-                duration = get_preset(TimeUnit.WORKTIME)
+                duration = get_preset("work_time_presets")
                 timer(duration)
             break
 
         time.sleep(0.1)
 
-def get_preset(unit: TimeUnit) -> int:
-    preset = dpg.get_value("presets")
-    index = 0 if unit == TimeUnit.WORKTIME else 1
-    return PRESETS[preset][index]
+def get_preset(listbox_tag: str) -> int:
+    listbox_value = dpg.get_value(listbox_tag)
+    if listbox_tag == "work_time_presets":
+        return WORK_TIME[listbox_value]
+    elif listbox_tag == "rest_time_presets":
+        return REST_TIME[listbox_value]
 
 def start_timer():
     global timer_stop, timer_loop
     timer_stop = False
     timer_loop = True
-    duration = get_preset(TimeUnit.WORKTIME)
+    duration = get_preset("work_time_presets")
     current_thread = threading.Thread(target=timer, 
                                       args=(duration,),
                                       daemon=True

@@ -1,15 +1,22 @@
 import dearpygui.dearpygui as dpg
-from config import PRESETS
+from config import WORK_TIME, REST_TIME
 import timer
 
 def setup_gui():
     with dpg.window(tag="Window"):
         with dpg.group():
-            dpg.add_text(default_value="Presets:")
+            dpg.add_text(default_value="Work time:")
             dpg.add_listbox(
-                tag="presets",
-                items=list(PRESETS.keys()),
-                default_value="25|5",
+                tag="work_time_presets",
+                items=list(WORK_TIME.keys()),
+                default_value="25",
+                width=45
+            )
+            dpg.add_text(default_value="Rest time:")
+            dpg.add_listbox(
+                tag="rest_time_presets",
+                items=list(REST_TIME.keys()),
+                default_value="5",
                 width=45
             )
 
@@ -32,23 +39,14 @@ def setup_gui():
                 width=100,
                 height=50,
                 show=False
-            )
-            dpg.add_button(
-                label="Pause",
-                tag="pause_btn",
-                callback=handle_pause,
-                width=100,
-                height=50
-            )
-            dpg.add_button(
-                label="Resume",
-                tag="resume_btn",
-                callback=handle_resume,
-                width=100,
-                height=50,
-                show=False
-            )
+            )          
             
+def listbox_toggle(
+        listbox_tag: str, 
+        flag: bool
+):
+    dpg.configure_item(listbox_tag, enabled=flag)          
+
 def replace_button(
         btn_to_replace_tag: str,
         btn_to_insert_tag: str      
@@ -58,19 +56,13 @@ def replace_button(
 
 def handle_start():
     replace_button("start_btn", "stop_btn")
-    dpg.configure_item("presets", enabled=False)
+    listbox_toggle("work_time_presets", False)
+    listbox_toggle("rest_time_presets", False)
     timer.start_timer()
 
 def handle_stop():
     replace_button("stop_btn", "start_btn")
     timer.stop_timer()
-    dpg.configure_item("presets", enabled=True)
+    listbox_toggle("work_time_presets", True)
+    listbox_toggle("rest_time_presets", True)
     dpg.set_value("time", "00:00")
-    
-def handle_pause():
-    replace_button("pause_btn", "resume_btn")
-    
-def handle_resume():
-    replace_button("resume_btn", "pause_btn")
-
-    

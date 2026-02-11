@@ -11,16 +11,7 @@ x, y = window_utils.calculate_default_window_pos(width=DEFAULT_WINDOW_WIDTH, hei
 
 
 def main():
-    dpg.create_context()
-    
-    with dpg.theme() as global_theme:
-        with dpg.theme_component(dpg.mvAll):
-            dpg.add_theme_style(dpg.mvStyleVar_FrameRounding, 10)
-            dpg.add_theme_style(dpg.mvStyleVar_FrameBorderSize, 1)
-            dpg.add_font("RobotoSlab.ttf")
-    dpg.bind_theme(global_theme)
-    
-    
+    dpg.create_context()    
     dpg.create_viewport(
         title='Pomodoro',
         width=DEFAULT_WINDOW_WIDTH,

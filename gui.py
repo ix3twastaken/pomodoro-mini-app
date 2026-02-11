@@ -1,11 +1,14 @@
 import dearpygui.dearpygui as dpg
-from config import WORK_TIME, REST_TIME
+
 import timer
+from config import WORK_TIME, REST_TIME
 
 def setup_gui():
     with dpg.window(tag="Window"):
         with dpg.group():
-            dpg.add_text(default_value="Work time:")
+            dpg.add_text(default_value="Work time:",
+                         tag="work_time_label"
+                         )
             dpg.add_listbox(
                 tag="work_time_presets",
                 items=list(WORK_TIME.keys()),
@@ -21,8 +24,8 @@ def setup_gui():
             )
 
         with dpg.group():
-            dpg.add_text(default_value="Time:", before="start")
-            dpg.add_text(default_value="00:00", tag="time")
+            dpg.add_text(default_value="Time:", before="work_time_label")
+            dpg.add_text(default_value="00:00", before="work_time_label", tag="time")
 
         with dpg.group():
             dpg.add_button(

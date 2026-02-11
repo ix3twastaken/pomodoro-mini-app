@@ -1,8 +1,10 @@
 import time
 import threading
+
+import dearpygui.dearpygui as dpg
+
 from config import WORK_TIME, REST_TIME
 from notifications import timer_notify
-import dearpygui.dearpygui as dpg
 
 timer_stop = False
 timer_loop = False

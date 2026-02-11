@@ -1,7 +1,9 @@
 import os
-from notifypy import Notify
-from config import WORK_TIME, REST_TIME
+
 import dearpygui.dearpygui as dpg
+from notifypy import Notify
+
+from config import WORK_TIME, REST_TIME
 
 def timer_notify(user_data: str):
     work_preset = dpg.get_value("work_time_presets")

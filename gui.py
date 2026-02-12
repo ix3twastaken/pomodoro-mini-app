@@ -2,20 +2,35 @@ import dearpygui.dearpygui as dpg
 
 import timer
 from config import WORK_TIME, REST_TIME
+from utils.sys_utils import get_file_path
 
+def setup_default_font():
+    with dpg.font_registry():
+        with dpg.font(file=get_file_path("Eitai.otf", __file__), 
+                      size=18, 
+                      default_font=True
+                      ) as font_id:
+            dpg.bind_font(font_id)
+    
+
+def setup_theme():
+    with dpg.theme() as global_theme:
+        with dpg.theme_component(dpg.mvAll):
+            dpg.add_theme_style(dpg.mvStyleVar_FrameRounding, 10)
+            dpg.add_theme_style(dpg.mvStyleVar_FrameBorderSize, 1)    
+    dpg.bind_theme(global_theme)
+    
 def setup_gui():
     with dpg.window(tag="Window"):
         with dpg.group():
-            dpg.add_text(default_value="Work time:",
-                         tag="work_time_label"
-                         )
+            dpg.add_text(default_value="Work time")
             dpg.add_listbox(
                 tag="work_time_presets",
                 items=list(WORK_TIME.keys()),
                 default_value="25",
                 width=45
             )
-            dpg.add_text(default_value="Rest time:")
+            dpg.add_text(default_value="Rest time")
             dpg.add_listbox(
                 tag="rest_time_presets",
                 items=list(REST_TIME.keys()),
@@ -24,8 +39,10 @@ def setup_gui():
             )
 
         with dpg.group():
-            dpg.add_text(default_value="Time:", before="work_time_label")
-            dpg.add_text(default_value="00:00", before="work_time_label", tag="time")
+            dpg.add_text(default_value="Time")
+            dpg.add_text(default_value="00:00", 
+                         tag="time"
+                        )       
 
         with dpg.group():
             dpg.add_button(

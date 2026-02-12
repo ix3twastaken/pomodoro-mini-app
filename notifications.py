@@ -2,6 +2,7 @@ import os
 
 import dearpygui.dearpygui as dpg
 from notifypy import Notify
+from utils.sys_utils import get_file_path
 
 from config import WORK_TIME, REST_TIME
 
@@ -13,13 +14,13 @@ def timer_notify(user_data: str):
     notification = Notify()
     if user_data == "start":
         notification.title='Pomodoro'
-        notification.icon=os.path.join(os.path.dirname(__file__), "icon.ico") #This icon was designed using resources from Flaticon.com.
+        notification.icon=get_file_path("icon.ico", __file__) #This icon was designed using resources from Flaticon.com.
         notification.message=f'Время работать! {work_duration} минут до перерыва'
         notification.application_name='Pomodoro'
         notification.send(block=False)
     else:
         notification.title='Pomodoro'
-        notification.icon=os.path.join(os.path.dirname(__file__), "icon.ico") #This icon was designed using resources from Flaticon.com.
+        notification.icon=get_file_path("icon.ico", __file__) #This icon was designed using resources from Flaticon.com.
         notification.message=f'Время отдыхать! {rest_duration} минут перерыва'
         notification.application_name='Pomodoro'
         notification.send(block=False)

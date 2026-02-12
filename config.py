@@ -1,15 +1,3 @@
-from enum import Enum
-
-class TimeUnit(Enum):
-    WORKTIME = 0
-    CHILLTIME = 1
-
-PRESETS = {
-    "25|5": (1500, 300),
-    "30|10": (1800, 600),
-    "45|15": (2700, 900)
-}
-
 WORK_TIME = {
     "5": 300,
     "10": 600,
@@ -40,5 +28,5 @@ REST_TIME = {
     "60": 3600
 }
 
-DEFAULT_WINDOW_WIDTH = 250
+DEFAULT_WINDOW_WIDTH = 350
 DEFAULT_WINDOW_HEIGHT = 250

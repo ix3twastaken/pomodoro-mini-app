@@ -1,25 +1,17 @@
-import os
-
 import dearpygui.dearpygui as dpg
 
-from gui import setup_gui
+import gui
 import utils.window_utils as window_utils
 from config import DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_WIDTH
-
+from utils.sys_utils import get_file_path
 
 x, y = window_utils.calculate_default_window_pos(width=DEFAULT_WINDOW_WIDTH, height=DEFAULT_WINDOW_HEIGHT)
-
 
 def main():
     dpg.create_context()
     
-    with dpg.theme() as global_theme:
-        with dpg.theme_component(dpg.mvAll):
-            dpg.add_theme_style(dpg.mvStyleVar_FrameRounding, 10)
-            dpg.add_theme_style(dpg.mvStyleVar_FrameBorderSize, 1)
-            dpg.add_font("RobotoSlab.ttf")
-    dpg.bind_theme(global_theme)
-    
+    gui.setup_default_font()
+    gui.setup_theme()
     
     dpg.create_viewport(
         title='Pomodoro',
@@ -28,10 +20,10 @@ def main():
         x_pos=x,
         y_pos=y,
         resizable=False,
-        small_icon=os.path.join(os.path.dirname(__file__), "icon.ico") #This icon was designed using resources from Flaticon.com.
+        small_icon=get_file_path("icon.ico", __file__) #This icon was designed using resources from Flaticon.com.
     )
 
-    setup_gui()
+    gui.setup_gui()
     dpg.setup_dearpygui()
     dpg.show_viewport()
     dpg.set_primary_window("Window", True)

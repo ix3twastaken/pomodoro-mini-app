@@ -1,27 +1,34 @@
 import dearpygui.dearpygui as dpg
 
 import timer
+from themes import create_theme_imgui_dark, create_theme_imgui_light
 from config import WORK_TIME, REST_TIME
 from utils.sys_utils import get_file_path
 
+font_path = get_file_path("Eitai.otf", __file__)
+
+def theme_callback(sender, app_data, user_data):
+    if user_data == "light":
+        dpg.bind_theme(create_theme_imgui_light())
+    else:
+        dpg.bind_theme(create_theme_imgui_dark())
+
 def setup_default_font():
     with dpg.font_registry():
-        with dpg.font(file=get_file_path("Eitai.otf", __file__), 
-                      size=18, 
-                      default_font=True
-                      ) as font_id:
-            dpg.bind_font(font_id)
-    
+        with dpg.font(file=font_path, size=18, default_font=True) as default_font:
+            pass
+        dpg.bind_font(default_font)
 
-def setup_theme():
-    with dpg.theme() as global_theme:
-        with dpg.theme_component(dpg.mvAll):
-            dpg.add_theme_style(dpg.mvStyleVar_FrameRounding, 10)
-            dpg.add_theme_style(dpg.mvStyleVar_FrameBorderSize, 1)    
-    dpg.bind_theme(global_theme)
+def setup_default_theme():
+    dpg.bind_theme(create_theme_imgui_dark())
     
 def setup_gui():
     with dpg.window(tag="Window"):
+        with dpg.menu_bar():
+            with dpg.menu(label="Themes", tag="themes_menu"):
+                dpg.add_menu_item(label="Dark", callback=theme_callback, user_data="dark")
+                dpg.add_menu_item(label="Light", callback=theme_callback, user_data="light")
+        
         with dpg.group():
             dpg.add_text(default_value="Work time")
             dpg.add_listbox(
@@ -59,7 +66,9 @@ def setup_gui():
                 width=100,
                 height=50,
                 show=False
-            )          
+            )     
+    setup_default_font() 
+    setup_default_theme()
             
 def listbox_toggle(
         listbox_tag: str, 

@@ -9,10 +9,7 @@ x, y = window_utils.calculate_default_window_pos(width=DEFAULT_WINDOW_WIDTH, hei
 
 def main():
     dpg.create_context()
-    
-    gui.setup_default_font()
-    gui.setup_theme()
-    
+
     dpg.create_viewport(
         title='Pomodoro',
         width=DEFAULT_WINDOW_WIDTH,
@@ -22,7 +19,6 @@ def main():
         resizable=False,
         small_icon=get_file_path("icon.ico", __file__) #This icon was designed using resources from Flaticon.com.
     )
-
     gui.setup_gui()
     dpg.setup_dearpygui()
     dpg.show_viewport()

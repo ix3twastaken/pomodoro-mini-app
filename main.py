@@ -14,6 +14,8 @@ def main():
         title='Pomodoro',
         width=DEFAULT_WINDOW_WIDTH,
         height=DEFAULT_WINDOW_HEIGHT,
+        max_width=DEFAULT_WINDOW_WIDTH,
+        max_height=DEFAULT_WINDOW_HEIGHT,
         x_pos=x,
         y_pos=y,
         resizable=False,

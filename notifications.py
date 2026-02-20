@@ -1,5 +1,3 @@
-import os
-
 import dearpygui.dearpygui as dpg
 from notifypy import Notify
 from utils.sys_utils import get_file_path

@@ -44,7 +44,7 @@ def setup_gui():
             dpg.add_separator()
             dpg.add_spacer(height=10)
         
-        with dpg.table(tag="presets_table", header_row=False, borders_outerH=False, borders_outerV=False, borders_innerH=False, borders_innerV=False):
+        with dpg.table(tag="presets_table", header_row=False):
             dpg.add_table_column(tag="col_1")
             dpg.add_table_column(tag="col_2")
 
@@ -107,14 +107,14 @@ def replace_button(
     dpg.show_item(btn_to_insert_tag)
 
 def handle_start():
+    timer.start_timer()
     replace_button("start_btn", "stop_btn")
     listbox_toggle("work_time_presets", False)
     listbox_toggle("rest_time_presets", False)
-    timer.start_timer()
 
 def handle_stop():
-    replace_button("stop_btn", "start_btn")
     timer.stop_timer()
+    replace_button("stop_btn", "start_btn")
     listbox_toggle("work_time_presets", True)
     listbox_toggle("rest_time_presets", True)
     dpg.set_value("time", "00:00")

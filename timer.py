@@ -9,6 +9,18 @@ from notifications import timer_notify
 timer_stop = False
 timer_loop = False
 
+def update_time_value(mins: int, secs: int):
+    if secs > 10 and mins > 10:
+        dpg.set_value("time", f"{mins}:{secs}")
+    elif secs < 10 and mins < 10:
+        dpg.set_value("time", f"0{mins}:0{secs}")
+    elif secs < 10:
+        dpg.set_value("time", f"{mins}:0{secs}")
+    elif mins < 10:
+        dpg.set_value("time", f"0{mins}:{secs}")
+    else:
+        dpg.set_value("time", f"{mins}:{secs}")
+
 def timer(seconds):
     global timer_stop, timer_loop
     end_time = round(time.time()) + seconds
@@ -18,7 +30,8 @@ def timer(seconds):
         mins = remaining_time // 60
         secs = remaining_time % 60
 
-        dpg.set_value("time", f"{mins}.{secs}")
+        update_time_value(mins, secs)
+        
         if remaining_time <= 0:
             if timer_loop:
                 timer_loop = False

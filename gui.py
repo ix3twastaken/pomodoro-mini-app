@@ -5,7 +5,7 @@ from themes import create_theme_imgui_dark, create_theme_imgui_light
 from config import *
 from utils.sys_utils import get_file_path
 
-font_path = get_file_path("Eitai.otf", __file__)
+font_path = get_file_path("Eitai.otf")
 
 def theme_callback(sender, app_data, user_data):
     if user_data == "light":

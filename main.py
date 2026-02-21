@@ -19,7 +19,7 @@ def main():
         x_pos=x,
         y_pos=y,
         resizable=False,
-        small_icon=get_file_path("icon.ico", __file__) #This icon was designed using resources from Flaticon.com.
+        small_icon=get_file_path("icon.ico")
     )
     gui.setup_gui()
     dpg.setup_dearpygui()

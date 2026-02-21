@@ -12,13 +12,13 @@ def timer_notify(user_data: str):
     notification = Notify()
     if user_data == "start":
         notification.title='Pomodoro'
-        notification.icon=get_file_path("icon.ico") 
+        notification.icon=get_file_path('assets\\icon.ico') 
         notification.message=f'Время работать! {work_duration} минут до перерыва'
         notification.application_name='Pomodoro'
         notification.send(block=False)
     else:
         notification.title='Pomodoro'
-        notification.icon=get_file_path("icon.ico")
+        notification.icon=get_file_path('assets\\icon.ico')
         notification.message=f'Время отдыхать! {rest_duration} минут перерыва'
         notification.application_name='Pomodoro'
         notification.send(block=False)

@@ -9,8 +9,8 @@ def get_monitor_size():
     return monitor_width, monitor_height
  
 def calculate_default_window_pos(
-        width: int = 250,
-        height: int = 250
+        width: int,
+        height: int
 ):
     monitor_width, monitor_height = get_monitor_size()
     
